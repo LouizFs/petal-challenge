@@ -16,7 +16,7 @@ class V1::PokemonsController < V1::BaseController
     @pokemon = Pokemon.new(pokemon_params)
 
     if @pokemon.save
-      render json: @pokemon, status: :created
+      render json: @pokemon, status: 201
     else
       render json: { error: @pokemon.errors.full_messages }, status: 422
     end
@@ -33,9 +33,8 @@ class V1::PokemonsController < V1::BaseController
   def destroy
     @pokemon.destroy
       
-    render json: @pokemon, status: 204
+    head :no_content
   end
-
 
   private
 

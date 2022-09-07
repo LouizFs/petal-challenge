@@ -1,11 +1,20 @@
 FROM ruby:3.0.1
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y \
+  curl \
+  build-essential \
+  libpq-dev
 
-COPY Gemfile Gemfile.lock ./
+WORKDIR /myapp
+COPY Gemfile /myapp/Gemfile
+COPY Gemfile.lock /myapp/Gemfile.lock
+RUN bundle install
 
-RUN bundle check || bundle install
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
 
-COPY . ./
-
-ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]
+# Configure the main process to run when running the image
+CMD ["rails", "server", "-b", "0.0.0.0"]

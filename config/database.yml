@@ -1,22 +1,17 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: <%= ENV['DATABASE_USER'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  port: <%= ENV['DATABASE_PORT'] || '5432' %>
-  host: <%= ENV['DATABASE_HOST'] %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  host: 0.0.0.0
+  port: 5432
+  username: postgres
+  password: password
+  pool: 5
 
 development:
   <<: *default
-  database: petal_challenge_development
+  database: myapp_development
+
 
 test:
   <<: *default
-  database: petal_challenge_test
-
-production:
-  <<: *default
-  database: petal_challenge_production
-
+  database: myapp_test
