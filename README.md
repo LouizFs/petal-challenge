@@ -1,5 +1,7 @@
 ##### API DOC
 
+https://documenter.getpostman.com/view/2025931/VVBUx6ga#4bbe8609-806c-4f05-82c3-56dea51b7a00
+
 ##### Prerequisites
 
 The setups steps expect following tools installed on the system.
@@ -53,5 +55,3 @@ You can start the rails server using the command given below.
 ```bundle
 bundle exec rspec
 ```
-
-And now you can visit the site with the URL http://localhost:3000

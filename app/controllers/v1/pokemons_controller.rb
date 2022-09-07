@@ -3,9 +3,9 @@ class V1::PokemonsController < V1::BaseController
   before_action :find_pokemon, only: %i(show update destroy)
 
   def index
-    @pokemons = Pokemon.filter(permitted_filters).page(params[:page])
+    @pokemons = Pokemon.filter(permitted_filters).page(page)
 
-    render json: @pokemons
+    render json: { page: page, pokemons: @pokemons } 
   end
 
   def show
@@ -48,6 +48,10 @@ class V1::PokemonsController < V1::BaseController
 
   def find_pokemon
     @pokemon = Pokemon.find(params[:id])
+  end
+
+  def page
+    params[:page] || 1
   end
 
 end

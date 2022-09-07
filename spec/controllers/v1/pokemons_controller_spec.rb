@@ -22,7 +22,7 @@ describe V1::PokemonsController do
       
       subject
 
-      expect(json_data.first["name"]).to eq("teste")
+      expect(json_data["pokemons"].first["name"]).to eq("teste")
     end
 
     it 'should paginate results' do
@@ -30,7 +30,7 @@ describe V1::PokemonsController do
 
       get :index, params: { page: 2 }
 
-      expect(json_data.length).to eq 25
+      expect(json_data["pokemons"].length).to eq 10
     end
 
     it 'should filter results' do
@@ -39,7 +39,7 @@ describe V1::PokemonsController do
 
       get :index, params: { name: "pikachu" }
 
-      expect(json_data.length).to eq 1
+      expect(json_data["pokemons"].length).to eq 1
     end
 
     it_behaves_like 'unauthorized'
