@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: 0.0.0.0
+  host: db
   port: 5432
   username: postgres
   password: password
@@ -10,8 +10,13 @@ default: &default
 development:
   <<: *default
   database: myapp_development
-
-
+production:
+  <<: *default
+  database: myapp_production
+  username: postgres
+  password: <%= ENV['PETAL_DATABASE_PASSWORD'] %>
+  host: <%= ENV['PETAL_DATABASE_HOST'] %>
+  port: <%= ENV['PETAL_DATABASE_PORT'] %>
 test:
   <<: *default
   database: myapp_test
